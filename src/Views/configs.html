@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+</head>
+<style>
+
+    #qrcode {
+        background-color: white;
+        border: 10px solid black;
+        padding: 14px;
+        margin: 20px auto 20px auto;
+        display: none;
+    }
+
+</style>
+<body>
+    <div id="qrcode">
+    </div>
+</body>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+
+    const socket = io()
+
+    socket.on('qr', (qrcode) => {
+
+        document.querySelector('#qrcode').innerHTML = ''
+        document.querySelector('#qrcode').style.display = 'block'
+        document.querySelector('#qrcode').style.width = '250px'
+
+        const qr = new QRCode('qrcode', {
+            text: qrcode,
+            width: 250,
+            height: 250,
+        })
+
+        console.log({qr})
+
+        // exibirQR(qr)
+
+    })
+
+</script>
+</html>
